@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "FOCUS Web Server",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["focus-web/server.py"],
+      "port": 8080
+    }
+  ]
+}

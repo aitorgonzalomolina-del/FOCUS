@@ -2,7 +2,7 @@
 Claude Setup.exe
 
 # Claude Code internals
-.claude/
+.claude/settings.local.json
 
 # Python
 __pycache__/
