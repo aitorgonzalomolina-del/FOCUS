@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accesorios — FOCUS Perfumes & Cosméticos</title>
+  <meta name="description" content="Catálogo de accesorios tech: fundas de iPhone, cargadores y AirPods Pro 2.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --acc-accent: #34d399;
+      --acc-accent-dim: rgba(52, 211, 153, 0.12);
+    }
+
+    /* ── Page Hero ── */
+    .acc-hero {
+      height: 260px;
+      background: url('../Featured-Dubai-Safari-1244x700.jpg') center center / cover no-repeat fixed;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 36px;
+      margin-top: 70px;
+      position: relative;
+    }
+    .acc-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,15,8,0.92) 0%, rgba(0,20,12,0.78) 50%, rgba(0,15,8,0.92) 100%);
+    }
+    .acc-hero .container { position: relative; z-index: 1; }
+    .acc-hero-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .3em;
+      color: var(--acc-accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .acc-hero-title {
+      font-family: var(--font-main);
+      font-size: 42px;
+      color: var(--silver-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .acc-hero-title span { color: var(--acc-accent); }
+    .acc-hero-sub { font-size: 13px; color: var(--text-secondary); }
+
+    /* ── Filter bar ── */
+    .acc-filterbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0 8px;
+      flex-wrap: wrap;
+    }
+    .acc-filter-btn {
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .acc-filter-btn:hover,
+    .acc-filter-btn.active {
+      border-color: var(--acc-accent);
+      color: var(--acc-accent);
+      background: var(--acc-accent-dim);
+    }
+    .acc-search {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      min-width: 220px;
+    }
+    .acc-search svg { color: var(--text-muted); flex-shrink: 0; }
+    .acc-search input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 12px;
+      width: 100%;
+    }
+    .acc-search input::placeholder { color: var(--text-muted); }
+    .acc-count { font-size: 12px; color: var(--text-muted); padding: 4px 0 16px; }
+
+    /* ── Category section header ── */
+    .cat-section { margin-bottom: 48px; }
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--acc-accent-dim);
+      color: var(--acc-accent);
+      border: 1px solid rgba(52,211,153,.25);
+    }
+    .cat-name {
+      font-family: var(--font-main);
+      font-size: 26px;
+      color: var(--silver-light);
+    }
+    .cat-count-badge {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ── Cards ── */
+    .acc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .acc-card-img {
+      width: 100%;
+      height: 180px;
+      background: #111;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      overflow: hidden;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+    .acc-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform .4s ease;
+    }
+    .acc-card:hover .acc-card-img img { transform: scale(1.06); }
+    .acc-card-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    /* ── Model select ── */
+    .acc-model-select {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 12px;
+      padding: 8px 10px;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 2px;
+      transition: border-color var(--transition);
+    }
+    .acc-model-select:focus { border-color: var(--acc-accent); }
+    .acc-model-select option { background: #1a1a1a; }
+
+    /* ── Color swatches ── */
+    .color-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .color-picker-label { font-size: 10px; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .color-swatch {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .15s, border-color .15s;
+      outline: 1px solid rgba(255,255,255,.15);
+      flex-shrink: 0;
+    }
+    .color-swatch.transparent-swatch {
+      background: conic-gradient(#ccc 90deg, #fff 90deg 180deg, #ccc 180deg 270deg, #fff 270deg) 0 0 / 10px 10px;
+    }
+    .color-swatch:hover { transform: scale(1.15); }
+    .color-swatch.selected { border-color: var(--acc-accent); transform: scale(1.18); outline-color: var(--acc-accent); }
+    .color-selected-label {
+      font-size: 11px;
+      color: var(--acc-accent);
+      margin-bottom: 10px;
+      min-height: 16px;
+    }
+    .acc-modal-img {
+      width: 100%;
+      height: 220px;
+      background: #111;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .acc-modal-img img { width: 100%; height: 100%; object-fit: contain; }
+    .acc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: all var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .acc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--acc-accent), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .acc-card:hover { border-color: rgba(52,211,153,.3); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+    .acc-card:hover::before { opacity: 1; }
+
+    .acc-card-cat {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      color: var(--acc-accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .acc-card-nombre {
+      font-family: var(--font-main);
+      font-size: 20px;
+      color: var(--silver-light);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .acc-card-compat {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .acc-card-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .acc-card-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .acc-feature-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .acc-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .acc-card-precio {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .acc-card-precio.sin-precio { color: var(--text-muted); font-size: 12px; font-weight: 400; }
+    .acc-card-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(52,211,153,.3);
+      background: var(--acc-accent-dim);
+      color: var(--acc-accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .acc-card-btn:hover { background: rgba(52,211,153,.22); }
+    .acc-card-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── Modal ── */
+    .acc-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .acc-modal-overlay.open { display: flex; }
+    .acc-modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      max-width: 560px;
+      width: 100%;
+      padding: 32px;
+      position: relative;
+      animation: fadeUp .2s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(16px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .acc-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: none; border: none;
+      color: var(--text-muted);
+      cursor: pointer; padding: 4px;
+    }
+    .acc-modal-close:hover { color: var(--text-primary); }
+    .acc-modal-cat {
+      font-size: 9px; font-weight: 700; letter-spacing: .25em;
+      color: var(--acc-accent); text-transform: uppercase; margin-bottom: 4px;
+    }
+    .acc-modal-nombre {
+      font-family: var(--font-main); font-size: 30px;
+      color: var(--silver-light); margin-bottom: 14px;
+    }
+    .acc-modal-desc {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+      padding: 12px 16px;
+      border-left: 2px solid var(--acc-accent);
+      background: var(--acc-accent-dim);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 20px;
+    }
+    .acc-modal-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;
+    }
+    .acc-spec-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 14px;
+    }
+    .acc-spec-label { font-size: 9px; color: var(--text-muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+    .acc-spec-value { font-size: 14px; font-weight: 600; color: var(--silver-light); }
+    .acc-modal-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .acc-modal-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 20px; border-top: 1px solid var(--border);
+    }
+    .acc-modal-precio-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+    .acc-modal-precio { font-size: 24px; font-weight: 700; color: var(--gold); }
+    .acc-modal-precio.sin-precio { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+
+    /* ── No results ── */
+    .no-results { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .no-results h3 { font-family: var(--font-main); font-size: 28px; color: var(--text-secondary); margin-bottom: 8px; }
+
+    @media (max-width: 768px) {
+      .acc-search { margin-left: 0; min-width: 100%; order: 10; }
+      .acc-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .acc-modal-specs { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .acc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="../logo.png" alt="FOCUS">
+      </a>
+      <nav class="nav-main">
+        <div class="nav-item">
+          <a href="productos.html?cat=Perfumes" class="nav-link">Perfumes</a>
+        </div>
+        <div class="nav-item">
+          <a href="productos.html?cat=Body+Cream" class="nav-link">Body Cream</a>
+        </div>
+        <div class="nav-item">
+          <a href="productos.html?cat=Ambientadores" class="nav-link">Ambientadores</a>
+        </div>
+        <div class="nav-item">
+          <a href="#" class="nav-link">Marcas</a>
+          <div class="nav-dropdown">
+            <a href="productos.html?marca=AFEER">Afeer</a>
+            <a href="productos.html?marca=AFNAN">Afnan</a>
+            <a href="productos.html?marca=AL+HARAMAIN">Al Haramain</a>
+            <a href="productos.html?marca=AL+WATANIAH">Al Wataniah</a>
+            <a href="productos.html?marca=ARMAF">Armaf</a>
+            <a href="productos.html?marca=LATTAFA">Lattafa</a>
+            <a href="productos.html?marca=MAISON+ALHAMBRA">Maison Alhambra</a>
+            <a href="productos.html?marca=ORIENTICA">Orientica</a>
+            <a href="productos.html?marca=RASASI">Rasasi</a>
+            <a href="productos.html?marca=ZIMAYA">Zimaya</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="vapers.html" class="nav-link">Vapers</a>
+        </div>
+        <div class="nav-item">
+          <a href="accesorios.html" class="nav-link active">Accesorios</a>
+        </div>
+      </nav>
+      <div class="header-actions">
+        <button class="header-icon-btn" id="cartBtn" title="Carrito">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <button class="hamburger" id="hamburgerBtn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="productos.html?cat=Perfumes">Perfumes</a>
+  <a href="productos.html?cat=Body+Cream">Body Cream</a>
+  <a href="productos.html?cat=Ambientadores">Ambientadores</a>
+  <a href="productos.html">Catálogo Perfumes</a>
+  <a href="vapers.html">Vapers</a>
+  <a href="accesorios.html">Accesorios</a>
+</nav>
+
+<!-- HERO -->
+<div class="acc-hero">
+  <div class="container">
+    <div class="acc-hero-label">Tecnología</div>
+    <h1 class="acc-hero-title">Accesorios <span>Tech</span></h1>
+    <p class="acc-hero-sub">Fundas de iPhone · Cargadores · AirPods Pro 2</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container" style="padding-bottom: 80px;">
+
+  <!-- Filter bar -->
+  <div class="acc-filterbar">
+    <button class="acc-filter-btn active" data-filter="">Todos</button>
+    <button class="acc-filter-btn" data-filter="Fundas">Fundas</button>
+    <button class="acc-filter-btn" data-filter="Cargadores">Cargadores</button>
+    <button class="acc-filter-btn" data-filter="AirPods">AirPods</button>
+    <div class="acc-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="accSearch" placeholder="Buscar accesorios...">
+    </div>
+  </div>
+
+  <p class="acc-count" id="accCount"></p>
+
+  <!-- Grid -->
+  <div id="accGrid"></div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 FOCUS Perfumes & Cosméticos. Todos los derechos reservados.</p>
+      <a href="index.html" style="font-size:12px;color:var(--gold);">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Tu Selección</h3>
+    <button class="header-icon-btn" id="closeCartBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <p>Tu carrito está vacío</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-value" id="cartTotal">$0.00</span>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="cartToWhatsApp()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+      </svg>
+      Consultar por WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="acc-modal-overlay" id="accModalOverlay">
+  <div class="acc-modal">
+    <button class="acc-modal-close" id="accModalClose">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div id="accModalContent"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/catalogo_accesorios.js"></script>
+<script src="js/app.js"></script>
+<script>
+let activeFilter = '';
+let searchTerm = '';
+
+// ── Filter buttons
+document.querySelectorAll('.acc-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.acc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+// ── Search
+document.getElementById('accSearch').addEventListener('input', e => {
+  searchTerm = e.target.value.toLowerCase().trim();
+  render();
+});
+
+// ── Format price
+function fmtPrecio(p) {
+  if (!p) return null;
+  return '$' + p.toLocaleString('es-AR') + ' ARS';
+}
+
+// ── Add to cart
+function addAccesorioToCart(idx) {
+  const a = CATALOGO_ACCESORIOS[idx];
+  if (!a) return;
+  if (!a.precio) { showToast('Consultá disponibilidad por WhatsApp'); return; }
+
+  const sel = getSeleccion(idx);
+  if (a.modelos && !sel.modelo) { showToast('Seleccioná un modelo de iPhone'); return; }
+  if (a.colores && !sel.color)  { showToast('Seleccioná un color'); return; }
+
+  const modelo = sel.modelo || null;
+  const color  = sel.color  || null;
+  const id = `acc__${idx}__${modelo || ''}__${color || 'unico'}`;
+  const nombre = [a.nombre, modelo, color].filter(Boolean).join(' — ');
+
+  const existing = cart.find(i => i.carpeta === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({
+      carpeta: id,
+      nombre,
+      marca: a.categoria,
+      precio: a.precio,
+      moneda: a.moneda,
+      tipo: 'accesorio',
+      imagen: a.imagen,
+      tiene_imagen: false,
+      qty: 1
+    });
+  }
+  saveCart();
+  updateCartUI();
+  showToast(`✓ ${nombre} agregado`);
+  openCart();
+}
+
+// ── Selections per product idx
+const selecciones = {}; // { idx: { modelo, color } }
+
+function getSeleccion(idx) {
+  if (!selecciones[idx]) selecciones[idx] = { modelo: null, color: null };
+  return selecciones[idx];
+}
+
+// ── Model selector
+function buildModelSelect(a, idx, scope) {
+  if (!a.modelos) return '';
+  const sel = getSeleccion(idx);
+  return `
+    <div class="color-picker-label">Modelo</div>
+    <select class="acc-model-select" id="model-select-${scope}-${idx}"
+      onchange="event.stopPropagation();selectModelo(${idx},'${scope}',this.value)">
+      <option value="">— Elegí tu modelo —</option>
+      ${a.modelos.map(m => `<option value="${m}" ${sel.modelo === m ? 'selected' : ''}>${m}</option>`).join('')}
+    </select>`;
+}
+
+function selectModelo(idx, scope, valor) {
+  getSeleccion(idx).modelo = valor || null;
+}
+
+// ── Color swatches
+function buildSwatches(a, idx, scope) {
+  if (!a.colores) return '';
+  const sel = getSeleccion(idx);
+  return `
+    <div class="color-picker-label" style="margin-top:10px;">Color</div>
+    <div class="color-picker" id="swatches-${scope}-${idx}">
+      ${a.colores.map(c => `
+        <div class="color-swatch ${c.nombre === 'Transparente' ? 'transparent-swatch' : ''} ${sel.color === c.nombre ? 'selected' : ''}"
+             style="${c.nombre !== 'Transparente' ? 'background:' + c.hex : ''}"
+             title="${c.nombre}"
+             onclick="event.stopPropagation();selectColor(${idx},'${c.nombre}','${scope}')">
+        </div>`).join('')}
+    </div>
+    <div class="color-selected-label" id="color-label-${scope}-${idx}">${sel.color ? 'Color: ' + sel.color : 'Seleccioná un color'}</div>`;
+}
+
+function selectColor(idx, nombre, scope) {
+  getSeleccion(idx).color = nombre;
+  const container = document.getElementById(`swatches-${scope}-${idx}`);
+  if (container) container.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('selected', s.title === nombre));
+  const label = document.getElementById(`color-label-${scope}-${idx}`);
+  if (label) label.textContent = `Color: ${nombre}`;
+}
+
+// ── Build card
+function buildCard(a, idx) {
+  const precio = a.precio
+    ? `<span class="acc-card-precio">${fmtPrecio(a.precio)}</span>`
+    : `<span class="acc-card-precio sin-precio">Consultar precio</span>`;
+
+  const imgHtml = a.imagen
+    ? `<img src="${a.imagen}" alt="${a.nombre}" loading="lazy">`
+    : `<div class="acc-card-img-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+        </svg>
+        <span>Imagen próximamente</span>
+       </div>`;
+
+  return `
+    <div class="acc-card" onclick="openModal(${idx})">
+      <div class="acc-card-img">${imgHtml}</div>
+      <div class="acc-card-cat">${a.categoria}</div>
+      <div class="acc-card-nombre">${a.nombre}</div>
+      <div class="acc-card-compat">Compatible: ${a.compatibilidad}</div>
+      <div class="acc-card-desc">${a.descripcion}</div>
+      ${buildModelSelect(a, idx, 'card')}
+      ${buildSwatches(a, idx, 'card')}
+      <div class="acc-card-features">
+        ${a.features.map(f => `<span class="acc-feature-tag">${f}</span>`).join('')}
+      </div>
+      <div class="acc-card-footer">
+        ${precio}
+      </div>
+      <button class="acc-card-btn" onclick="event.stopPropagation();addAccesorioToCart(${idx})" ${!a.precio ? 'disabled' : ''}>
+        ${a.precio ? '+ Agregar al carrito' : 'Consultar por WhatsApp'}
+      </button>
+    </div>`;
+}
+
+// ── Render grid
+function render() {
+  const filtered = CATALOGO_ACCESORIOS.filter((a, i) => {
+    if (activeFilter && a.categoria !== activeFilter) return false;
+    if (searchTerm && !a.nombre.toLowerCase().includes(searchTerm) && !a.descripcion.toLowerCase().includes(searchTerm)) return false;
+    return true;
+  });
+
+  const count = filtered.length;
+  document.getElementById('accCount').textContent =
+    count + ' producto' + (count !== 1 ? 's' : '') + ' encontrado' + (count !== 1 ? 's' : '');
+
+  if (count === 0) {
+    document.getElementById('accGrid').innerHTML = `
+      <div class="no-results"><h3>Sin resultados</h3><p>Probá con otros filtros.</p></div>`;
+    return;
+  }
+
+  // Group by category
+  const grupos = {};
+  filtered.forEach(a => {
+    if (!grupos[a.categoria]) grupos[a.categoria] = [];
+    grupos[a.categoria].push({ a, idx: CATALOGO_ACCESORIOS.indexOf(a) });
+  });
+
+  let html = '';
+  for (const [cat, items] of Object.entries(grupos)) {
+    html += `
+      <div class="cat-section">
+        <div class="cat-header">
+          <span class="cat-badge">Accesorios</span>
+          <span class="cat-name">${cat}</span>
+          <span class="cat-count-badge">${items.length} producto${items.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="acc-grid">
+          ${items.map(({ a, idx }) => buildCard(a, idx)).join('')}
+        </div>
+      </div>`;
+  }
+  document.getElementById('accGrid').innerHTML = html;
+}
+
+// ── Modal
+function openModal(idx) {
+  const a = CATALOGO_ACCESORIOS[idx];
+  const imgHtml = a.imagen
+    ? `<div class="acc-modal-img"><img src="${a.imagen}" alt="${a.nombre}"></div>`
+    : '';
+  const precioHtml = a.precio
+    ? `<div class="acc-modal-precio">${fmtPrecio(a.precio)}</div>`
+    : `<div class="acc-modal-precio sin-precio">Consultar precio</div>`;
+  const btnHtml = a.precio
+    ? `<button class="btn btn-primary" onclick="addAccesorioToCart(${idx}); document.getElementById('accModalOverlay').classList.remove('open');">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        Agregar al carrito
+      </button>`
+    : `<a class="btn btn-outline" href="https://wa.me/5492645557617?text=${encodeURIComponent('Hola! Me interesa el accesorio: ' + a.nombre + '. ¿Tienen precio y disponibilidad?')}" target="_blank">
+        Consultar por WhatsApp
+      </a>`;
+
+  const selectoresModal = (a.modelos || a.colores) ? `
+    ${buildModelSelect(a, idx, 'modal')}
+    ${buildSwatches(a, idx, 'modal')}
+  ` : '';
+
+  document.getElementById('accModalContent').innerHTML = `
+    ${imgHtml}
+    <div class="acc-modal-cat">${a.categoria}</div>
+    <div class="acc-modal-nombre">${a.nombre}</div>
+    <div class="acc-modal-desc">${a.descripcion}</div>
+    <div class="acc-modal-specs">
+      <div class="acc-spec-item">
+        <div class="acc-spec-label">Compatibilidad</div>
+        <div class="acc-spec-value">${a.compatibilidad}</div>
+      </div>
+      <div class="acc-spec-item">
+        <div class="acc-spec-label">Material</div>
+        <div class="acc-spec-value">${a.material}</div>
+      </div>
+    </div>
+    ${selectoresModal}
+    <div class="acc-modal-features">
+      ${a.features.map(f => `<span class="acc-feature-tag">${f}</span>`).join('')}
+    </div>
+    <div class="acc-modal-footer">
+      <div>
+        <div class="acc-modal-precio-label">Precio</div>
+        ${precioHtml}
+      </div>
+      ${btnHtml}
+    </div>`;
+  document.getElementById('accModalOverlay').classList.add('open');
+}
+
+document.getElementById('accModalClose').addEventListener('click', () => {
+  document.getElementById('accModalOverlay').classList.remove('open');
+});
+document.getElementById('accModalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.getElementById('accModalOverlay').classList.remove('open');
+});
+
+// ── Init
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  updateCartUI();
+});
+</script>
+</body>
+</html>

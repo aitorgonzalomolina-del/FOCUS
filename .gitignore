@@ -1,0 +1,25 @@
+# Instaladores
+Claude Setup.exe
+
+# Claude Code internals
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+.env
+
+# Resultados de búsquedas generados en runtime
+busquedas/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
