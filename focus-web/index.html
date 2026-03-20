@@ -21,7 +21,7 @@
 
       <!-- Logo -->
       <a href="index.html" class="logo">
-        <img src="../logo.png" alt="FOCUS">
+        <img src="logo.png" alt="FOCUS">
       </a>
 
       <!-- Navigation -->
@@ -91,6 +91,8 @@
   <a href="productos.html?cat=Body+Cream">Body Cream</a>
   <a href="productos.html?cat=Ambientadores">Ambientadores</a>
   <a href="productos.html">Catálogo completo</a>
+  <a href="vapers.html">Vapers</a>
+  <a href="accesorios.html">Accesorios</a>
   <a href="productos.html?marca=LATTAFA">Lattafa</a>
   <a href="productos.html?marca=AL+HARAMAIN">Al Haramain</a>
   <a href="productos.html?marca=ARMAF">Armaf</a>
@@ -371,7 +373,7 @@
 
       <!-- Brand -->
       <div class="footer-brand">
-        <img src="../logo.png" alt="FOCUS" style="height:48px;">
+        <img src="logo.png" alt="FOCUS" style="height:48px;">
         <p>Perfumes y cosméticos de lujo árabe. Las mejores fragancias de Oriente Medio, disponibles para vos.</p>
         <div class="footer-social">
           <a href="#" class="social-btn" title="Instagram">
@@ -463,6 +465,17 @@
     </div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cupon-row">
+      <div class="cupon-input-group">
+        <input type="text" id="cuponInput" placeholder="Código de descuento" autocomplete="off" onkeydown="if(event.key==='Enter')aplicarCupon()">
+        <button class="cupon-btn" onclick="aplicarCupon()">Aplicar</button>
+      </div>
+      <div class="cupon-msg" id="cuponMsg"></div>
+    </div>
+    <div class="cart-discount-row" id="discountRow" style="display:none;">
+      <span class="cart-discount-label">Descuento <span id="discountLabel"></span></span>
+      <span id="discountAmount" class="cart-discount-amount">-$0</span>
+    </div>
     <div class="cart-total-row">
       <span class="cart-total-label">Total</span>
       <span class="cart-total-value" id="cartTotal">$0.00</span>
@@ -509,13 +522,13 @@
     const ambImg     = CATALOGO.find(p => p.categoria === 'Ambientadores' && p.tiene_imagen);
 
     if (perfumeImg) {
-      document.getElementById('catBgPerfumes').style.backgroundImage = `url('../catalogo/${perfumeImg.carpeta}/imagen.jpeg')`;
+      document.getElementById('catBgPerfumes').style.backgroundImage = `url('catalogo/${perfumeImg.carpeta}/imagen.jpeg')`;
     }
     if (creamImg) {
-      document.getElementById('catBgBodyCream').style.backgroundImage = `url('../catalogo/${creamImg.carpeta}/imagen.jpeg')`;
+      document.getElementById('catBgBodyCream').style.backgroundImage = `url('catalogo/${creamImg.carpeta}/imagen.jpeg')`;
     }
     if (ambImg) {
-      document.getElementById('catBgAmb').style.backgroundImage = `url('../catalogo/${ambImg.carpeta}/imagen.jpeg')`;
+      document.getElementById('catBgAmb').style.backgroundImage = `url('catalogo/${ambImg.carpeta}/imagen.jpeg')`;
     }
   }
 

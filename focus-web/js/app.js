@@ -19,6 +19,51 @@ const WHATSAPP_NUMBER = '5492645557617'; // Argentina: 54 + 9 + 264 5557617
 const STORE_NAME      = 'FOCUS Perfumes & Cosméticos';
 
 // ─────────────────────────────────────────
+// Cupones de descuento — editá estos valores
+// ─────────────────────────────────────────
+const CUPONES = {
+  'FOCUS': { tipo: 'porcentaje', valor: 10, label: '10% off' },
+};
+
+let appliedCupon = null;
+
+function aplicarCupon() {
+  const input  = document.getElementById('cuponInput');
+  const msgEl  = document.getElementById('cuponMsg');
+  if (!input || !msgEl) return;
+
+  const code = input.value.trim().toUpperCase();
+
+  if (!code) {
+    if (appliedCupon) {
+      appliedCupon = null;
+      updateCartUI();
+      msgEl.textContent = 'Cupón removido.';
+      msgEl.className = 'cupon-msg cupon-ok';
+    }
+    return;
+  }
+
+  if (appliedCupon && appliedCupon.code === code) {
+    msgEl.textContent = 'Este cupón ya está aplicado.';
+    msgEl.className = 'cupon-msg cupon-error';
+    return;
+  }
+
+  const cupon = CUPONES[code];
+  if (!cupon) {
+    msgEl.textContent = 'Cupón inválido o expirado.';
+    msgEl.className = 'cupon-msg cupon-error';
+    return;
+  }
+
+  appliedCupon = { code, ...cupon };
+  msgEl.textContent = `Cupón "${code}" aplicado — ${cupon.label}`;
+  msgEl.className = 'cupon-msg cupon-ok';
+  updateCartUI();
+}
+
+// ─────────────────────────────────────────
 // Cart State
 // ─────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem('focus_cart') || '[]');
@@ -142,6 +187,17 @@ function cartToWhatsApp() {
     msg += `*Subtotal Otros (USD):* ${formatPriceValue(usdTotal, 'USD')}\n`;
   }
 
+  if (appliedCupon) {
+    const arsItems  = cart.filter(i => i.moneda === 'ARS');
+    const arsSubt   = arsItems.reduce((s, i) => s + i.precio * i.qty, 0);
+    const arsDesc   = appliedCupon.tipo === 'porcentaje' ? Math.round(arsSubt * appliedCupon.valor / 100) : 0;
+    msg += `\n*Cupón aplicado:* ${appliedCupon.code} (${appliedCupon.label})\n`;
+    if (arsDesc > 0) {
+      msg += `*Descuento:* -${formatPriceValue(arsDesc, 'ARS')}\n`;
+      msg += `*Total final ARS:* ${formatPriceValue(Math.max(0, arsSubt - arsDesc), 'ARS')}\n`;
+    }
+  }
+
   msg += `\nQuedo a la espera de confirmación de stock y opciones de envío.\n`;
   msg += `Desde ya, muchas gracias.\n\n`;
   msg += `_Consulta generada el ${fecha}_`;
@@ -183,11 +239,36 @@ function updateCartUI() {
 
   const arsTotal = cart.filter(i => i.moneda === 'ARS').reduce((s, i) => s + i.precio * i.qty, 0);
   const usdTotal = cart.filter(i => i.moneda !== 'ARS').reduce((s, i) => s + i.precio * i.qty, 0);
+
+  const discountRow    = document.getElementById('discountRow');
+  const discountAmount = document.getElementById('discountAmount');
+  const discountLabel  = document.getElementById('discountLabel');
+
+  let arsDesc = 0, usdDesc = 0;
+  if (appliedCupon && (arsTotal > 0 || usdTotal > 0)) {
+    if (appliedCupon.tipo === 'porcentaje') {
+      arsDesc = Math.round(arsTotal * appliedCupon.valor / 100);
+      usdDesc = Math.round(usdTotal * appliedCupon.valor / 100 * 100) / 100;
+    }
+    if (discountLabel)  discountLabel.textContent  = `(${appliedCupon.code} — ${appliedCupon.label})`;
+    if (discountAmount) {
+      let dTxt = '';
+      if (arsDesc > 0) dTxt += '-' + formatPriceValue(arsDesc, 'ARS');
+      if (usdDesc > 0) dTxt += (dTxt ? ' ' : '') + '-$' + usdDesc.toFixed(2);
+      discountAmount.textContent = dTxt;
+    }
+    if (discountRow) discountRow.style.display = 'flex';
+  } else {
+    if (discountRow) discountRow.style.display = 'none';
+  }
+
   if (cartTotalEl) {
+    const finalArs = Math.max(0, arsTotal - arsDesc);
+    const finalUsd = Math.max(0, usdTotal - usdDesc);
     let totalText = '';
-    if (arsTotal > 0) totalText += formatPriceValue(arsTotal, 'ARS');
+    if (arsTotal > 0) totalText += formatPriceValue(finalArs, 'ARS');
     if (arsTotal > 0 && usdTotal > 0) totalText += ' + ';
-    if (usdTotal > 0) totalText += formatPriceValue(usdTotal, 'USD');
+    if (usdTotal > 0) totalText += formatPriceValue(finalUsd, 'USD');
     cartTotalEl.textContent = totalText;
   }
 
@@ -200,7 +281,7 @@ function updateCartUI() {
         ${(item.tipo === 'vaper' || item.tipo === 'accesorio') && item.imagen
           ? `<img src="${item.imagen}" alt="${formatName(item.nombre)}" loading="lazy" style="object-fit:contain;background:#111;">`
           : item.tiene_imagen
-            ? `<img src="../catalogo/${item.carpeta}/imagen.jpeg" alt="${formatName(item.nombre)}" loading="lazy"
+            ? `<img src="catalogo/${item.carpeta}/imagen.jpeg" alt="${formatName(item.nombre)}" loading="lazy"
                  onerror="this.parentElement.innerHTML=buildPlaceholder('${item.marca}','${item.categoria}')">`
             : buildPlaceholder(item.marca, item.categoria || 'Vapers')
         }
@@ -243,7 +324,7 @@ function updateCartUI() {
 // ─────────────────────────────────────────
 function buildProductCard(product) {
   const imgSrc = product.tiene_imagen
-    ? `../catalogo/${product.carpeta}/imagen.jpeg`
+    ? `catalogo/${product.carpeta}/imagen.jpeg`
     : null;
 
   const name  = formatName(product.nombre);
@@ -346,7 +427,7 @@ function openModal(carpeta) {
 
   const name   = formatName(product.nombre);
   const marca  = product.marca !== 'OTROS' ? product.marca : '';
-  const imgSrc = product.tiene_imagen ? `../catalogo/${product.carpeta}/imagen.jpeg` : null;
+  const imgSrc = product.tiene_imagen ? `catalogo/${product.carpeta}/imagen.jpeg` : null;
 
   document.getElementById('modalContent').innerHTML = `
     <div class="modal-image">

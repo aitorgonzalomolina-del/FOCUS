@@ -18,7 +18,7 @@
     /* ── Page Hero ── */
     .acc-hero {
       height: 260px;
-      background: url('../Featured-Dubai-Safari-1244x700.jpg') center center / cover no-repeat fixed;
+      background: url('Featured-Dubai-Safari-1244x700.jpg') center center / cover no-repeat fixed;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: flex-end;
@@ -404,7 +404,7 @@
   <div class="container">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="../logo.png" alt="FOCUS">
+        <img src="logo.png" alt="FOCUS">
       </a>
       <nav class="nav-main">
         <div class="nav-item">
@@ -529,6 +529,17 @@
     </div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cupon-row">
+      <div class="cupon-input-group">
+        <input type="text" id="cuponInput" placeholder="Código de descuento" autocomplete="off" onkeydown="if(event.key==='Enter')aplicarCupon()">
+        <button class="cupon-btn" onclick="aplicarCupon()">Aplicar</button>
+      </div>
+      <div class="cupon-msg" id="cuponMsg"></div>
+    </div>
+    <div class="cart-discount-row" id="discountRow" style="display:none;">
+      <span class="cart-discount-label">Descuento <span id="discountLabel"></span></span>
+      <span id="discountAmount" class="cart-discount-amount">-$0</span>
+    </div>
     <div class="cart-total-row">
       <span class="cart-total-label">Total</span>
       <span class="cart-total-value" id="cartTotal">$0.00</span>

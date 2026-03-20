@@ -335,7 +335,7 @@ h1, h2, h3, h4 {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('../../shutterstock_1711382014.webp');
+  background-image: url('../shutterstock_1711382014.webp');
   background-size: cover;
   background-position: center top;
   filter: brightness(0.28) saturate(0.75) sepia(0.3);
@@ -1258,6 +1258,75 @@ h1, h2, h3, h4 {
   font-family: var(--font-main);
   font-size: 28px;
   color: var(--gold);
+}
+
+/* ── Cupón de descuento ── */
+.cupon-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cupon-input-group {
+  display: flex;
+  gap: 8px;
+}
+.cupon-input-group input {
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 13px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color var(--transition);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.cupon-input-group input:focus {
+  border-color: var(--gold);
+}
+.cupon-input-group input::placeholder {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+.cupon-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+.cupon-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold);
+}
+.cupon-msg {
+  font-size: 12px;
+  min-height: 16px;
+}
+.cupon-ok    { color: #34d399; }
+.cupon-error { color: #ef4444; }
+.cart-discount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-discount-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.cart-discount-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: #34d399;
 }
 
 /* ── Footer ── */
